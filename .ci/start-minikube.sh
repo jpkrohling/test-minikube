@@ -14,10 +14,9 @@ set -x
 
 # socat is needed for port forwarding
 sudo apt-get update -qq
-sudo apt-get install socat
+sudo apt-get install socat -qq
 
 export MINIKUBE_VERSION=v1.12.1
-export KUBERNETES_VERSION=v1.16.2
 
 MINIKUBE=$(which minikube) # it's outside of the regular PATH, so, need the full path when calling with sudo
 
@@ -31,16 +30,18 @@ touch "${HOME}"/.kube/config
 minikube version
 sudo ${MINIKUBE} start \
     --addons=ingress \
-    --kubernetes-version=$KUBERNETES_VERSION \
     --extra-config=apiserver.authorization-mode=RBAC \
-    --driver=none
+    --driver=docker
 
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
 minikube update-context
 
 # waiting for node(s) to be ready
-JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}'; until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
+JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}'
+until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do 
+    sleep 1
+done
 
 # waiting for kube-dns to be ready
 export COREDNSPODS=$(kubectl --namespace kube-system get pods -lk8s-app=kube-dns | grep coredns | awk '{print $1}')
