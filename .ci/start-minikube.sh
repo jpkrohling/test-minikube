@@ -30,6 +30,7 @@ touch "${HOME}"/.kube/config
 minikube version
 ${MINIKUBE} start \
     --addons=ingress \
+    --driver=docker \
     --container-runtime=crio
 
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
