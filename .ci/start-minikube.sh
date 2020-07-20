@@ -30,8 +30,7 @@ touch "${HOME}"/.kube/config
 minikube version
 ${MINIKUBE} start \
     --addons=ingress \
-    --extra-config=apiserver.authorization-mode=RBAC \
-    --driver=docker
+    --container-runtime=crio
 
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
