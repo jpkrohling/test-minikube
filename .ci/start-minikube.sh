@@ -28,7 +28,7 @@ mkdir "${HOME}"/.kube || true
 touch "${HOME}"/.kube/config
 
 minikube version
-sudo ${MINIKUBE} start \
+${MINIKUBE} start \
     --addons=ingress \
     --extra-config=apiserver.authorization-mode=RBAC \
     --driver=docker
