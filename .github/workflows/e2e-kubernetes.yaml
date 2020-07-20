@@ -1,0 +1,10 @@
+name: "Kubernetes end-to-end tests"
+on: [push, pull_request]
+
+jobs:
+  end-to-end:
+    runs-on: ubuntu-16.04
+    steps:
+    - uses: jpkrohling/setup-minikube@v1-release
+      with:
+        minikube-version: v1.5.2

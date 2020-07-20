@@ -1,0 +1,1 @@
+Test of minikube as a github CI step
