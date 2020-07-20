@@ -32,7 +32,7 @@ sudo ${MINIKUBE} start \
     --addons=ingress \
     --kubernetes-version=$KUBERNETES_VERSION \
     --extra-config=apiserver.authorization-mode=RBAC \
-    --driver=none
+    --driver=none \
     --WantNoneDriverWarning=false
 
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
