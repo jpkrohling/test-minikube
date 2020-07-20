@@ -27,15 +27,13 @@ sudo mount --make-rshared /sys
 mkdir "${HOME}"/.kube || true
 touch "${HOME}"/.kube/config
 
-# minikube config
-minikube config set WantNoneDriverWarning false
-minikube config set vm-driver none
-
 minikube version
 sudo ${MINIKUBE} start \
     --addons=ingress \
     --kubernetes-version=$KUBERNETES_VERSION \
-    --extra-config=apiserver.authorization-mode=RBAC
+    --extra-config=apiserver.authorization-mode=RBAC \
+    --driver=none
+    --WantNoneDriverWarning=false
 
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
