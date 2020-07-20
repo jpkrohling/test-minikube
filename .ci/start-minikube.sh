@@ -13,7 +13,8 @@ set -x
 # https://github.com/coreos/prometheus-operator/blob/master/scripts/create-minikube.sh
 
 # socat is needed for port forwarding
-sudo apt-get update && sudo apt-get install socat
+sudo apt-get update -qq
+sudo apt-get install socat
 
 export MINIKUBE_VERSION=v1.12.1
 export KUBERNETES_VERSION=v1.16.2
@@ -32,8 +33,7 @@ sudo ${MINIKUBE} start \
     --addons=ingress \
     --kubernetes-version=$KUBERNETES_VERSION \
     --extra-config=apiserver.authorization-mode=RBAC \
-    --driver=none \
-    --WantNoneDriverWarning=false
+    --driver=none
 
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
 
