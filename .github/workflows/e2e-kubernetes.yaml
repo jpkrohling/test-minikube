@@ -20,9 +20,6 @@ jobs:
         operator-sdk-version: v0.18.2
     - uses: actions/checkout@v1
 
-    - name: "setup podman/crio"
-      run: ./.ci/setup-crio.sh
-
     - name: "start minikube"
       run: ./.ci/start-minikube.sh
 
