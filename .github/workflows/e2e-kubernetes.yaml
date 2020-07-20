@@ -3,13 +3,13 @@ on: [push, pull_request]
 
 jobs:
   end-to-end:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
 
     - uses: jpkrohling/setup-minikube@v1-release
       with:
-        minikube-version: v1.5.2
+        minikube-version: v1.12.1
 
     - uses: jpkrohling/setup-kubectl@v1-release
 
