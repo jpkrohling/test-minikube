@@ -8,3 +8,5 @@ jobs:
     - uses: jpkrohling/setup-minikube@v1-release
       with:
         minikube-version: v1.5.2
+    - name: "start minikube"
+      run: ./.ci/start-minikube.sh
